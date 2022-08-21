@@ -18,6 +18,8 @@ function randomShape() {
 function PentatonicShapeToNameContainer() {
   let [root, setRoot] = useState(randomRoot());
   let [shape, setShape] = useState(randomShape());
+  let shapes = minorPentatonicShapesFor({ root, shape });
+  let dots = shapes[getRandomInt(shapes.length)];
 
   const onNextClick = () => {
     setRoot(randomRoot());
@@ -28,22 +30,22 @@ function PentatonicShapeToNameContainer() {
     <PentatonicShapeToName
       root={root}
       shape={shape}
+      dots={dots}
       onNextClick={onNextClick}
     />
   );
 }
 
 function PentatonicShapeToName(props) {
-  let { root, shape, onNextClick } = props;
+  let { root, shape, onNextClick, dots } = props;
 
   let [showNotes] = useState(false);
   let [selectedRoot, setSelectedRoot] = useState();
   let [selectedShape, setSelectedShape] = useState();
   let [winState, setWinState] = useState();
-  let shapes = minorPentatonicShapesFor({ root, shape });
-  let dots = shapes[getRandomInt(shapes.length)];
 
   useEffect(() => {
+    console.log("");
     setWinState();
   }, [root, shape]);
 
