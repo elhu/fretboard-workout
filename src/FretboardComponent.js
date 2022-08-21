@@ -6,20 +6,19 @@ import { config } from "./config";
 let fretboard;
 
 function FretboardComponent(props) {
-  const dots = props.dots;
+  const { showNotes, dots, editable, onClick } = props;
   useEffect(() => {
     fretboard = new Fretboard({
       el: "#fretboard",
       fretCount: config.fretCount,
-      dotText: noteFromPosition,
+      dotText: showNotes ? noteFromPosition : () => "",
     });
-  }, []);
+  }, [showNotes]);
   useEffect(() => {
     fretboard.clear();
     fretboard.setDots(dots).render();
-
-    fretboard.on("click", props.onClick);
-  }, [dots]);
+    fretboard.on("click", editable ? onClick : () => null);
+  }, [dots, onClick, editable]);
   return <figure id="fretboard"></figure>;
 }
 

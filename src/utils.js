@@ -109,7 +109,6 @@ function minorPentatonicShapesFor({ shape, root }) {
     rootOffset[root],
     rootOffset[root] + 12,
   ];
-  console.log(offsets);
   let notes = offsets
     .map((offset) => {
       return minorPentatonicShapes[shape].map(({ string, fret }) => {
@@ -120,7 +119,6 @@ function minorPentatonicShapesFor({ shape, root }) {
       (shape) =>
         !shape.some(({ string, fret }) => fret < 0 || fret > config.fretCount)
     );
-  console.log(notes);
   return notes;
 }
 

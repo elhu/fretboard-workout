@@ -21,7 +21,12 @@ function App() {
 
   return (
     <div className="App">
-      <FretboardComponent dots={dots} onClick={onFretboardClick} />
+      <FretboardComponent
+        dots={dots}
+        showNotes={true}
+        onClick={onFretboardClick}
+        editable={true}
+      />
     </div>
   );
 }
