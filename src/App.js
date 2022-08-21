@@ -1,4 +1,5 @@
 import "./App.css";
+import { PentatonicNameToShapeContainer } from "./exercises/PentatonicNameToShape";
 import { PentatonicShapeToNameContainer } from "./exercises/PentatonicShapeToName";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
 
   return (
     <div className="App">
+      {/* <PentatonicNameToShapeContainer /> */}
       <PentatonicShapeToNameContainer />
     </div>
   );
