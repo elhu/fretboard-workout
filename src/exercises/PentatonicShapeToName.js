@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FretboardComponent } from "../FretboardComponent";
 import { DropDown } from "../DropDown";
 import { minorPentatonicShapesFor, notes } from "../utils";
@@ -36,12 +36,16 @@ function PentatonicShapeToNameContainer() {
 function PentatonicShapeToName(props) {
   let { root, shape, onNextClick } = props;
 
-  let [showNotes, setShowNotes] = useState(false);
+  let [showNotes] = useState(false);
   let [selectedRoot, setSelectedRoot] = useState();
   let [selectedShape, setSelectedShape] = useState();
   let [winState, setWinState] = useState();
   let shapes = minorPentatonicShapesFor({ root, shape });
   let dots = shapes[getRandomInt(shapes.length)];
+
+  useEffect(() => {
+    setWinState();
+  }, [root, shape]);
 
   const onSubmit = () =>
     setWinState(
