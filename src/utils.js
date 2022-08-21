@@ -88,6 +88,8 @@ const minorPentatonicShapes = {
   ],
 };
 
+const notes = ["A", "Bb", "C", "C#", "D", "D#", "E", "F", "F#", "G", "Ab"];
+
 const rootOffset = {
   E: 0,
   F: 1,
@@ -122,4 +124,4 @@ function minorPentatonicShapesFor({ shape, root }) {
   return notes;
 }
 
-export { noteFromPosition, minorPentatonicShapesFor };
+export { noteFromPosition, minorPentatonicShapesFor, notes };
