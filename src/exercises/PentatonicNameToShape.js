@@ -87,7 +87,7 @@ function PentatonicNameToShape(props) {
     );
   }
   return (
-    <div className="App">
+    <div className="exercise">
       <p>
         Notes to find: {root} pentatonic (shape {shape})
       </p>

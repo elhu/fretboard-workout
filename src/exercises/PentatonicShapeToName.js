@@ -67,7 +67,8 @@ function PentatonicShapeToName(props) {
     );
   }
   return (
-    <div className="App">
+    <div className="exercise">
+      <p>Find the key and the shape of the pentatonic below</p>
       <DropDown
         options={notes.map((n) => {
           return { value: n, text: n };
