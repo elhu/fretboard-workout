@@ -8,10 +8,7 @@ function FretboardComponent({ showNotes, dots, editable, onClick }) {
   const fredboardEl = useRef(null);
 
   useEffect(() => {
-    console.log("called on mount");
-
     if (!fretboard.current && fredboardEl.current) {
-      console.log("called on mount: should work once");
       fretboard.current = new Fretboard({
         el: fredboardEl.current,
         fretCount: config.fretCount,
@@ -20,7 +17,6 @@ function FretboardComponent({ showNotes, dots, editable, onClick }) {
     }
 
     return () => {
-      console.log("called on unmount");
       fretboard.current.removeEventListeners();
     };
   }, [showNotes, fretboard]);
