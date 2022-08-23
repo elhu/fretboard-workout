@@ -6,11 +6,11 @@ import { PentatonicShapeToNameContainer } from "./exercises/PentatonicShapeToNam
 function App() {
   return (
     <div className="App">
-      <div class="sidenav">
+      <div className="sidenav">
         <Link to="/pentatonic-shape-to-name">Pentatonic shape to key</Link>
         <Link to="/pentatonic-name-to-shape">Pentatonic key to shape</Link>
       </div>{" "}
-      <div class="main">
+      <div className="main">
         <Routes>
           <Route path="/" element={<PentatonicShapeToNameContainer />} />
           <Route
