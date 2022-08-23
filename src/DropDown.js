@@ -4,7 +4,7 @@ function DropDown(props) {
   return (
     <div>
       <select defaultValue={defaultText} onChange={onChange}>
-        <option key="default">{defaultText}</option>
+        {defaultText && <option key="default">{defaultText}</option>}
         {options.map(({ value, text }) => {
           return (
             <option key={value} value={value}>
