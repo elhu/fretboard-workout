@@ -1,7 +1,7 @@
 import { Position } from "@moonwave99/fretboard.js";
 import { useEffect, useState } from "react";
 import { FretboardComponent } from "../FretboardComponent";
-import { FretboardHandler, Note, Shape, WinState } from "../types";
+import { FretboardHandler, Note, PentatonicShape, WinState } from "../types";
 import { minorPentatonicShapesFor, randomRoot, randomShape } from "../utils";
 
 function PentatonicNameToShapeContainer() {
@@ -24,7 +24,7 @@ function PentatonicNameToShapeContainer() {
 
 interface Props {
   root: Note;
-  shape: Shape;
+  shape: PentatonicShape;
   onNextClick: VoidFunction;
 }
 

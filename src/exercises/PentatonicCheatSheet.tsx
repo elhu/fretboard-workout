@@ -3,11 +3,11 @@ import { Position } from "@moonwave99/fretboard.js";
 import { FretboardComponent } from "../FretboardComponent";
 import { DropDown } from "../DropDown";
 import { minorPentatonicShapesFor, notes } from "../utils";
-import { Note, Shape } from "../types";
+import { Note, PentatonicShape } from "../types";
 
 function PentatonicCheatSheetContainer() {
   let [root, setRoot] = useState<Note>("A");
-  let [shape, setShape] = useState<Shape>(1);
+  let [shape, setShape] = useState<PentatonicShape>(1);
   const [dots, setDots] = useState<Position[]>([]);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function PentatonicCheatSheetContainer() {
         options={Array.from({ length: 5 }, (_, i) => i + 1).map((n) => {
           return { value: String(n), text: String(n) };
         })}
-        onChange={(e) => setShape(Number(e.target.value) as Shape)}
+        onChange={(e) => setShape(Number(e.target.value) as PentatonicShape)}
       />
       <FretboardComponent dots={dots} showNotes={true} editable={false} />
     </div>

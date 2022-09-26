@@ -1,6 +1,6 @@
 import { get as getScale } from "@tonaljs/scale";
 import { config } from "./config";
-import { Note, NoteOnString, RootShape, Shape } from "./types";
+import { Note, NoteOnString, PentatonicRootShape, PentatonicShape } from "./types";
 
 const fretboardNotes = ["E2", "A2", "D3", "G3", "B3", "E4"]
   .reverse()
@@ -16,7 +16,7 @@ function noteFromPosition({ string, fret }: { string: number; fret: number }) {
   return fretboardNotes[string - 1][fret].slice(0, -1);
 }
 
-const minorPentatonicShapes: Record<Shape, NoteOnString[]> = {
+const minorPentatonicShapes: Record<PentatonicShape, NoteOnString[]> = {
   1: [
     { string: 6, fret: 0 },
     { string: 6, fret: 3 },
@@ -122,7 +122,7 @@ const rootOffset: Record<Note, number> = {
 function minorPentatonicShapesFor({
   shape,
   root,
-}: RootShape): NoteOnString[][] {
+}: PentatonicRootShape): NoteOnString[][] {
   const offsets = [
     rootOffset[root] - 12,
     rootOffset[root],
@@ -149,8 +149,8 @@ export function randomRoot() {
   return notes[getRandomInt(notes.length)];
 }
 
-export function randomShape(): Shape {
-  return (getRandomInt(5) + 1) as Shape;
+export function randomShape(): PentatonicShape {
+  return (getRandomInt(5) + 1) as PentatonicShape;
 }
 
 export { noteFromPosition, minorPentatonicShapesFor, notes };

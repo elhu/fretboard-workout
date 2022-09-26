@@ -9,7 +9,7 @@ import {
   randomRoot,
   randomShape,
 } from "../utils";
-import { Note, Shape, WinState } from "../types";
+import { Note, PentatonicShape, WinState } from "../types";
 
 function PentatonicShapeToNameContainer() {
   let [root, setRoot] = useState(randomRoot());
@@ -34,7 +34,7 @@ function PentatonicShapeToNameContainer() {
 
 interface Props {
   root: Note;
-  shape: Shape;
+  shape: PentatonicShape;
   onNextClick: VoidFunction;
   dots: Position[];
 }
@@ -42,7 +42,7 @@ interface Props {
 function PentatonicShapeToName({ root, shape, onNextClick, dots }: Props) {
   let [showNotes] = useState(false);
   let [selectedRoot, setSelectedRoot] = useState<Note>();
-  let [selectedShape, setSelectedShape] = useState<Shape>();
+  let [selectedShape, setSelectedShape] = useState<PentatonicShape>();
   let [winState, setWinState] = useState<WinState>("idle");
 
   useEffect(() => {
@@ -70,7 +70,7 @@ function PentatonicShapeToName({ root, shape, onNextClick, dots }: Props) {
         options={Array.from({ length: 5 }, (_, i) => i + 1).map((n) => {
           return { value: String(n), text: String(n) };
         })}
-        onChange={(e) => setSelectedShape(Number(e.target.value) as Shape)}
+        onChange={(e) => setSelectedShape(Number(e.target.value) as PentatonicShape)}
         defaultText="Select a pentatonic shape"
       />
       <button onClick={onSubmit}>Submit</button>

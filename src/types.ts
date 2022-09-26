@@ -1,6 +1,6 @@
 import { Position } from "@moonwave99/fretboard.js";
 
-export type Shape = 1 | 2 | 3 | 4 | 5;
+export type PentatonicShape = 1 | 2 | 3 | 4 | 5;
 export type Note =
   | "A"
   | "Bb"
@@ -15,8 +15,8 @@ export type Note =
   | "G"
   | "Ab";
 
-export type RootShape = {
-  shape: Shape;
+export type PentatonicRootShape = {
+  shape: PentatonicShape;
   root: Note;
 };
 
