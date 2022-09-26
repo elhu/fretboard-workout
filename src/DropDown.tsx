@@ -1,6 +1,9 @@
-function DropDown(props) {
-  const { options, onChange, defaultText } = props;
-
+interface Props {
+  options: { value: string; text: string }[];
+  defaultText?: string;
+  onChange: React.SelectHTMLAttributes<HTMLSelectElement>["onChange"];
+}
+export const DropDown = ({ options, onChange, defaultText }: Props) => {
   return (
     <div>
       <select defaultValue={defaultText} onChange={onChange}>
@@ -15,6 +18,4 @@ function DropDown(props) {
       </select>
     </div>
   );
-}
-
-export { DropDown };
+};

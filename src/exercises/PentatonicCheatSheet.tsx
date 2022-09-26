@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
+import { Position } from "@moonwave99/fretboard.js";
 import { FretboardComponent } from "../FretboardComponent";
 import { DropDown } from "../DropDown";
 import { minorPentatonicShapesFor, notes } from "../utils";
+import { Note, PentatonicShape } from "../types";
 
 function PentatonicCheatSheetContainer() {
-  let [root, setRoot] = useState("A");
-  let [shape, setShape] = useState("1");
-  let [dots, setDots] = useState([]);
+  let [root, setRoot] = useState<Note>("A");
+  let [shape, setShape] = useState<PentatonicShape>(1);
+  const [dots, setDots] = useState<Position[]>([]);
 
   useEffect(() => {
     if (root && shape) {
@@ -21,13 +23,13 @@ function PentatonicCheatSheetContainer() {
         options={notes.map((n) => {
           return { value: n, text: n };
         })}
-        onChange={(e) => setRoot(e.target.value)}
+        onChange={(e) => setRoot(e.target.value as Note)}
       />
       <DropDown
         options={Array.from({ length: 5 }, (_, i) => i + 1).map((n) => {
-          return { value: n, text: `${n}` };
+          return { value: String(n), text: String(n) };
         })}
-        onChange={(e) => setShape(e.target.value)}
+        onChange={(e) => setShape(Number(e.target.value) as PentatonicShape)}
       />
       <FretboardComponent dots={dots} showNotes={true} editable={false} />
     </div>

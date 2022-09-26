@@ -1,5 +1,6 @@
 import { get as getScale } from "@tonaljs/scale";
 import { config } from "./config";
+import { Note, NoteOnString, PentatonicRootShape, PentatonicShape } from "./types";
 
 const fretboardNotes = ["E2", "A2", "D3", "G3", "B3", "E4"]
   .reverse()
@@ -11,11 +12,11 @@ const fretboardNotes = ["E2", "A2", "D3", "G3", "B3", "E4"]
     ];
   });
 
-function noteFromPosition({ string, fret }) {
+function noteFromPosition({ string, fret }: { string: number; fret: number }) {
   return fretboardNotes[string - 1][fret].slice(0, -1);
 }
 
-const minorPentatonicShapes = {
+const minorPentatonicShapes: Record<PentatonicShape, NoteOnString[]> = {
   1: [
     { string: 6, fret: 0 },
     { string: 6, fret: 3 },
@@ -88,9 +89,22 @@ const minorPentatonicShapes = {
   ],
 };
 
-const notes = ["A", "Bb", "C", "C#", "D", "D#", "E", "F", "F#", "G", "Ab"];
+const notes: Note[] = [
+  "A",
+  "Bb",
+  "B",
+  "C",
+  "C#",
+  "D",
+  "D#",
+  "E",
+  "F",
+  "F#",
+  "G",
+  "Ab",
+];
 
-const rootOffset = {
+const rootOffset: Record<Note, number> = {
   E: 0,
   F: 1,
   "F#": 2,
@@ -105,13 +119,16 @@ const rootOffset = {
   "D#": 11,
 };
 
-function minorPentatonicShapesFor({ shape, root }) {
-  let offsets = [
+function minorPentatonicShapesFor({
+  shape,
+  root,
+}: PentatonicRootShape): NoteOnString[][] {
+  const offsets = [
     rootOffset[root] - 12,
     rootOffset[root],
     rootOffset[root] + 12,
   ];
-  let notes = offsets
+  const notes: NoteOnString[][] = offsets
     .map((offset) => {
       return minorPentatonicShapes[shape].map(({ string, fret }) => {
         return { string: string, fret: fret + offset };
@@ -122,6 +139,18 @@ function minorPentatonicShapesFor({ shape, root }) {
         !shape.some(({ string, fret }) => fret < 0 || fret > config.fretCount)
     );
   return notes;
+}
+
+export function getRandomInt(max: number) {
+  return Math.floor(Math.random() * max);
+}
+
+export function randomRoot() {
+  return notes[getRandomInt(notes.length)];
+}
+
+export function randomShape(): PentatonicShape {
+  return (getRandomInt(5) + 1) as PentatonicShape;
 }
 
 export { noteFromPosition, minorPentatonicShapesFor, notes };

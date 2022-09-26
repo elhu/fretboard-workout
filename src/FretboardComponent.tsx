@@ -1,11 +1,24 @@
 import { useEffect, useRef } from "react";
-import { Fretboard } from "@moonwave99/fretboard.js";
+import { Fretboard, Position } from "@moonwave99/fretboard.js";
 import { noteFromPosition } from "./utils";
 import { config } from "./config";
+import { FretboardHandler } from "./types";
 
-function FretboardComponent({ showNotes, dots, editable, onClick }) {
-  const fretboard = useRef(null);
-  const fredboardEl = useRef(null);
+interface Props {
+  showNotes: boolean;
+  dots: Position[];
+  editable: boolean;
+  onClick?: FretboardHandler;
+}
+
+export const FretboardComponent = ({
+  showNotes,
+  dots,
+  editable,
+  onClick,
+}: Props) => {
+  const fretboard = useRef<Fretboard | null>(null);
+  const fredboardEl = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (!fretboard.current && fredboardEl.current) {
@@ -17,7 +30,7 @@ function FretboardComponent({ showNotes, dots, editable, onClick }) {
     }
 
     return () => {
-      fretboard.current.removeEventListeners();
+      fretboard.current?.removeEventListeners();
     };
   }, [showNotes, fretboard]);
 
@@ -25,11 +38,9 @@ function FretboardComponent({ showNotes, dots, editable, onClick }) {
     if (fretboard.current) {
       fretboard.current.clear();
       fretboard.current.setDots(dots).render();
-      fretboard.current.on("click", editable ? onClick : () => null);
+      fretboard.current.on("click", editable && onClick ? onClick : () => null);
     }
   }, [dots, onClick, editable, fretboard]);
 
   return <figure id="fretboard" ref={fredboardEl} />;
-}
-
-export { FretboardComponent };
+};
